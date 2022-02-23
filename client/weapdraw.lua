@@ -118,18 +118,18 @@ CreateThread(function()
 				loadAnimDict("weapons@pistol@")
 
 				HolsterVariant = GetPedDrawableVariation(ped, 7)
-				if HolsterVariant == 8 then
+				if HolsterVariant == 1 then
 					WearingHolster = true
-				elseif HolsterVariant == 1 then
-					WearingHolster = true
-				elseif HolsterVariant == 6 then
-					WearingHolster = true
-				elseif HolsterVariant == 2 then
-					WearingHolster = true
-				elseif HolsterVariant == 3 then
-					WearingHolster = true
-				elseif HolsterVariant == 5 then
-					WearingHolster = false
+				-- elseif HolsterVariant == 1 then
+				-- 	WearingHolster = true
+				-- elseif HolsterVariant == 6 then
+				-- 	WearingHolster = true
+				-- elseif HolsterVariant == 2 then
+				-- 	WearingHolster = true
+				-- elseif HolsterVariant == 3 then
+				-- 	WearingHolster = true
+				-- elseif HolsterVariant == 5 then
+				-- 	WearingHolster = false
 				end
 				if CheckWeapon(newWeap) then
 					if holstered then
@@ -143,12 +143,12 @@ CreateThread(function()
 							SetCurrentPedWeapon(ped, newWeap, true)
 
 							if IsWeaponHolsterable(newWeap) then
-								if currentHolster == 8 then
-									SetPedComponentVariation(ped, 7, 2, 0, 2)
-								elseif currentHolster == 1 then
+								if currentHolster == 1 then
 									SetPedComponentVariation(ped, 7, 3, 0, 2)
-								elseif currentHolster == 6 then
-									SetPedComponentVariation(ped, 7, 5, 0, 2)
+								-- elseif currentHolster == 1 then
+								-- 	SetPedComponentVariation(ped, 7, 3, 0, 2)
+								-- elseif currentHolster == 6 then
+								-- 	SetPedComponentVariation(ped, 7, 5, 0, 2)
 								end
 							end
 							currWeapon = newWeap
@@ -187,12 +187,12 @@ CreateThread(function()
 							SetCurrentPedWeapon(ped, newWeap, true)
 
 							if IsWeaponHolsterable(newWeap) then
-								if currentHolster == 8 then
-									SetPedComponentVariation(ped, 7, 2, 0, 2)
-								elseif currentHolster == 1 then
+								if currentHolster == 1 then
 									SetPedComponentVariation(ped, 7, 3, 0, 2)
-								elseif currentHolster == 6 then
-									SetPedComponentVariation(ped, 7, 5, 0, 2)
+								-- elseif currentHolster == 1 then
+								-- 	SetPedComponentVariation(ped, 7, 3, 0, 2)
+								-- elseif currentHolster == 6 then
+								-- 	SetPedComponentVariation(ped, 7, 5, 0, 2)
 								end
 							end
 
@@ -225,12 +225,12 @@ CreateThread(function()
 							SetCurrentPedWeapon(ped, newWeap, true)
 
 							if IsWeaponHolsterable(newWeap) then
-								if currentHolster == 8 then
-									SetPedComponentVariation(ped, 7, 2, 0, 2)
-								elseif currentHolster == 1 then
+								if currentHolster == 1 then
 									SetPedComponentVariation(ped, 7, 3, 0, 2)
-								elseif currentHolster == 6 then
-									SetPedComponentVariation(ped, 7, 5, 0, 2)
+								-- elseif currentHolster == 1 then
+								-- 	SetPedComponentVariation(ped, 7, 3, 0, 2)
+								-- elseif currentHolster == 6 then
+								-- 	SetPedComponentVariation(ped, 7, 5, 0, 2)
 								end
 							end
 
