@@ -50,7 +50,11 @@ end)
 
 CreateThread(function()
 	for i = 1, 15 do
-		EnableDispatchService(i, false)
+		if i == 6 then 
+			EnableDispatchService(i, true)
+		else
+			EnableDispatchService(i, false)
+		end
 	end
 
 	SetMaxWantedLevel(0)
@@ -74,7 +78,7 @@ CreateThread(function()
 			if weapon == `WEAPON_FIREEXTINGUISHER` or  weapon == `WEAPON_PETROLCAN` then
 				if IsPedShooting(ped) then
 					SetPedInfiniteAmmo(ped, true, `WEAPON_FIREEXTINGUISHER`)
-					SetPedInfiniteAmmo(ped, true, `WEAPON_PETROLCAN`)
+					-- SetPedInfiniteAmmo(ped, true, `WEAPON_PETROLCAN`)
 				end
 			end
 		else

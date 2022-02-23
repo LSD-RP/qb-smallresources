@@ -80,6 +80,14 @@ QBCore.Functions.CreateUseableItem("kurkakola", function(source, item)
     end
 end)
 
+QBCore.Functions.CreateUseableItem("sprunk", function(source, item)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Drink", src, item.name)
+    end
+end)
+
 ----------- / Drug
 
 QBCore.Functions.CreateUseableItem("joint", function(source, item)
@@ -87,6 +95,14 @@ QBCore.Functions.CreateUseableItem("joint", function(source, item)
     local Player = QBCore.Functions.GetPlayer(src)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
         TriggerClientEvent("consumables:client:UseJoint", src)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("cigs", function(source, item)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:UseCig", src)
     end
 end)
 
@@ -108,6 +124,11 @@ end)
 QBCore.Functions.CreateUseableItem("oxy", function(source, item)
     local src = source
     TriggerClientEvent("consumables:client:oxy", src)
+end)
+
+QBCore.Functions.CreateUseableItem("peyote", function(source, item)
+    local src = source
+    TriggerClientEvent("consumables:client:peyote", src)
 end)
 
 QBCore.Functions.CreateUseableItem("meth", function(source, item)
@@ -203,3 +224,63 @@ end)
 --         TriggerClientEvent("consumables:client:UseRedSmoke", source)
 --     end
 -- end)
+
+--Burgershot
+
+--Drinks
+QBCore.Functions.CreateUseableItem("burger-softdrink", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Drink", source, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("burger-mshake", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Drink", source, item.name)
+    end
+end)
+
+--Food
+QBCore.Functions.CreateUseableItem("burger-bleeder", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("burger-moneyshot", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("burger-torpedo", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("burger-heartstopper", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("burger-meatfree", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("burger-fries", function(source, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)

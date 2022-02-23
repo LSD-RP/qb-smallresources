@@ -22,9 +22,14 @@ end)
 RegisterNetEvent('equip:harness', function(item)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
+    -- for i,v in pairs(Player.PlayerData.items[item.slot].info) do
+    --     print(i)
+    --     print(v)
+    -- end
     if Player.PlayerData.items[item.slot].info.uses - 1 == 0 then
         TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items['harness'], "remove")
         Player.Functions.RemoveItem('harness', 1)
+        TriggerClientEvent('QBCore:Notify', source, "Your harness has broken!", 'error')
     else
         Player.PlayerData.items[item.slot].info.uses = Player.PlayerData.items[item.slot].info.uses - 1
         Player.Functions.SetInventory(Player.PlayerData.items)
@@ -37,6 +42,7 @@ RegisterNetEvent('seatbelt:DoHarnessDamage', function(hp, data)
 
     if hp == 0 then
         Player.Functions.RemoveItem('harness', 1, data.slot)
+        TriggerClientEvent('QBCore:Notify', source, "Your harness has broken!", 'error')
     else
         Player.PlayerData.items[data.slot].info.uses = Player.PlayerData.items[data.slot].info.uses - 1
         Player.Functions.SetInventory(Player.PlayerData.items)

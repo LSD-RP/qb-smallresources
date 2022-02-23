@@ -9,10 +9,10 @@ CreateThread(function()
         for loc,_ in pairs(Config.Teleports) do
             for k, v in pairs(Config.Teleports[loc]) do
                 local dist = #(pos - vector3(v.coords.x, v.coords.y, v.coords.z))
-                if dist < 2 then
+                if dist < 7.5 then
                     inRange = true
-                    DrawMarker(2, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.15, 255, 255, 255, 255, 0, 0, 0, 1, 0, 0, 0)
-
+                    -- DrawMarker(2, v.coords.x, v.coords.y, v.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.15, 255, 255, 255, 255, 0, 0, 0, 1, 0, 0, 0)
+                    DrawMarker(1, v.coords.x, v.coords.y, v.coords.z - 1.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.7, 0.7, 0.9, 77, 181, 255, 0.8, false, false, 2,false, nil, nil, false)
                     if dist < 1 then
                         DrawText3Ds(v.coords.x, v.coords.y, v.coords.z, v.drawText)
                         if IsControlJustReleased(0, 51) then

@@ -72,8 +72,8 @@ CreateThread(function()
 end)
 
 RegisterNetEvent('fireworks:client:UseFirework', function(itemName, assetName)
-    QBCore.Functions.Progressbar("spawn_object", "Placing object..", 3000, false, true, {
-        disableMovement = true,
+    QBCore.Functions.Progressbar("spawn_object", "Placing object..", 500, false, true, {
+        disableMovement = false,
         disableCarMovement = true,
         disableMouse = false,
         disableCombat = true,

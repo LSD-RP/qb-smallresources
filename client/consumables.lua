@@ -339,6 +339,63 @@ RegisterNetEvent('consumables:client:oxy', function()
     end)
 end)
 
+RegisterNetEvent('consumables:client:peyote', function()
+    local animals = {
+        "a_c_boar",
+        "a_c_cat_01",
+        "a_c_cow",
+        "a_c_deer",
+        "a_c_pig",
+        "a_c_pug",
+        "a_c_rat",
+        "a_c_husky",
+        "a_c_poodle",
+        "a_c_pug",
+        "a_c_retriever",
+        "a_c_shepherd",
+        "a_c_westy",
+    }
+    local pedmodel = animals[math.random(1,#animals)]
+    print(pedmodel)
+    QBCore.Functions.Progressbar("use_peyote", "Eating", 2000, false, true, {
+        disableMovement = false,
+        disableCarMovement = false,
+		disableMouse = false,
+		disableCombat = true,
+    }, {
+		animDict = "mp_suicide",
+		anim = "pill",
+		flags = 49,
+    }, {}, {}, function() -- Done
+        StopAnimTask(PlayerPedId(), "mp_suicide", "pill", 1.0)
+        TriggerServerEvent("QBCore:Server:RemoveItem", "peyote", 1)
+        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["peyote"], "remove")
+        ClearPedBloodDamage(PlayerPedId())
+        DoScreenFadeOut(2000)
+        while not IsScreenFadedOut() do Wait(10) end
+        Wait(500)
+		TriggerEvent("qb-admin:client:SetModel", tostring(pedmodel))
+        DoScreenFadeIn(2000)
+        local gender = "male"
+        if QBCore.Functions.GetPlayerData().charinfo.gender == 1 then gender = "female" end
+        if gender == "male" then
+            pedmodel = "mp_m_freemode_01"
+        else
+            pedmodel = "mp_f_freemode_01"
+        end
+        Wait(60 * 1000 * 5)
+        DoScreenFadeOut(2000)
+        while not IsScreenFadedOut() do Wait(10) end
+        Wait(500)
+        TriggerEvent("qb-admin:client:SetModel", tostring(pedmodel))
+        TriggerServerEvent("qb-clothes:loadPlayerSkin")
+        DoScreenFadeIn(2000)
+    end, function() -- Cancel
+        StopAnimTask(PlayerPedId(), "mp_suicide", "pill", 1.0)
+        QBCore.Functions.Notify("Canceled", "error")
+    end)
+end)
+
 RegisterNetEvent('consumables:client:meth', function()
     QBCore.Functions.Progressbar("snort_meth", "Smoking Ass Meth", 1500, false, true, {
         disableMovement = false,
@@ -376,6 +433,24 @@ RegisterNetEvent('consumables:client:UseJoint', function()
             TriggerEvent('animations:client:EmoteCommandStart', {"smokeweed"})
         end
         TriggerEvent("evidence:client:SetStatus", "weedsmell", 300)
+        TriggerEvent('animations:client:SmokeWeed')
+    end)
+end)
+
+RegisterNetEvent('consumables:client:UseCig', function()
+    QBCore.Functions.Progressbar("smoke_joint", "Lighting cigarette..", 1500, false, true, {
+        disableMovement = false,
+        disableCarMovement = false,
+		disableMouse = false,
+		disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["cigs"], "remove")
+        if IsPedInAnyVehicle(PlayerPedId(), false) then
+            TriggerEvent('animations:client:EmoteCommandStart', {"smoke3"})
+        else
+            TriggerEvent('animations:client:EmoteCommandStart', {"smoke"})
+        end
+        -- TriggerEvent("evidence:client:SetStatus", "weedsmell", 300)
         TriggerEvent('animations:client:SmokeWeed')
     end)
 end)
@@ -459,7 +534,7 @@ RegisterNetEvent('consumables:client:UseHeavyArmor', function()
             if GetPedDrawableVariation(ped, 9) == 7 then
                 SetPedComponentVariation(ped, 9, 19, GetPedTextureVariation(ped, 9), 2)
             else
-                SetPedComponentVariation(ped, 9, 5, 2, 2) -- Blue
+                SetPedComponentVariation(ped, 9, 39, 2, 2) -- Blue
             end
         else
             currentVest = GetPedDrawableVariation(ped, 30)

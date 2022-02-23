@@ -90,4 +90,4 @@ RegisterCommand('togglecruise', function()
     end
 end, false)
 
-RegisterKeyMapping('togglecruise', 'Toggle Cruise Control', 'keyboard', 'Y')
+RegisterKeyMapping('togglecruise', 'Toggle Cruise Control', 'keyboard', 'U')
