@@ -13,7 +13,8 @@ local objects = {
     {x = 996.17, y = 51.69, z = 68.45, model = "vw_prop_casino_3cardpoker_01"},
     {x = 1000.66, y = 50.88, z = 68.45, model = "vw_prop_casino_3cardpoker_01"},
     {x = 998.44, y = 60.99, z = 68.45, model = "vw_prop_casino_3cardpoker_01"},
-    {x = 994.89, y = 58.29, z = 68.45, model = "vw_prop_casino_3cardpoker_01"}
+    {x = 994.89, y = 58.29, z = 68.45, model = "vw_prop_casino_3cardpoker_01"},
+    -- {x = 1287.77, y = -1720.85, z = 54.83, model = "prop_forsale_sign_03"}
 }
 
 CreateThread(function()
