@@ -226,19 +226,23 @@ RegisterNetEvent('consumables:client:Drink', function(itemName)
 end)
 
 RegisterNetEvent('consumables:client:DrinkCoffee', function(itemName)
-    local prop_name = 'prop_fib_coffee'
-    Citizen.CreateThread(function()
-        local playerPed = PlayerPedId()
-        local x,y,z = table.unpack(GetEntityCoords(playerPed))
-        local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
-        local boneIndex = GetPedBoneIndex(playerPed, 18905)
-        AttachEntityToEntity(prop, playerPed, boneIndex, 0.008, -0.01, -0.03, 90.0, 270.0, 90.0, true, true, false, true, 1, true)
-        RequestAnimDict('mp_player_intdrink')
-        TaskPlayAnim(playerPed, 'mp_player_intdrink', 'loop_bottle', 1.0, -1.0, 5000, 0, 1, true, true, true)
-        Citizen.Wait(1000)
-        ClearPedSecondaryTask(playerPed)
-        DeleteObject(prop)
-    end)
+    local playerPed = PlayerPedId()
+    TriggerEvent('animations:client:EmoteCommandStart', {"coffee"})
+    Citizen.Wait(6000)
+    ClearPedSecondaryTask(playerPed)
+    -- local prop_name = 'prop_fib_coffee'
+    -- Citizen.CreateThread(function()
+        
+    --     local x,y,z = table.unpack(GetEntityCoords(playerPed))
+    --     local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
+    --     local boneIndex = GetPedBoneIndex(playerPed, 18905)
+    --     AttachEntityToEntity(prop, playerPed, boneIndex, 0.008, -0.01, -0.03, 90.0, 270.0, 90.0, true, true, false, true, 1, true)
+    --     RequestAnimDict('mp_player_intdrink')
+    --     TaskPlayAnim(playerPed, 'mp_player_intdrink', 'loop_bottle', 1.0, -1.0, 5000, 0, 1, true, true, true)
+    --     Citizen.Wait(1000)
+    --     ClearPedSecondaryTask(playerPed)
+    --     DeleteObject(prop)
+    -- end)
     QBCore.Functions.Progressbar("drink_something", "Drinking..", 5000, false, true, {
         disableMovement = false,
         disableCarMovement = false,

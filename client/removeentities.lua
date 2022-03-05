@@ -14,6 +14,15 @@ local objects = {
     {x = 1000.66, y = 50.88, z = 68.45, model = "vw_prop_casino_3cardpoker_01"},
     {x = 998.44, y = 60.99, z = 68.45, model = "vw_prop_casino_3cardpoker_01"},
     {x = 994.89, y = 58.29, z = 68.45, model = "vw_prop_casino_3cardpoker_01"},
+    -- for sale signs at house vector3(1493.74, 2202.9, 81.18)
+    {x = 1490.73, y = 2210.46, z = 80.48, model = "prop_forsale_lrg_04"},
+    {x = 1492.71, y = 2494.05, z = 82.42, model = "prop_forsale_sign_01"},
+    -- bunker signs and entrance at vector3(1493.74, 2202.9, 81.18)
+    {x = 1558.5, y = 2210.8, z = 78.98,  model = "gr_prop_gr_sign_01e"},
+    {x = 1567.02, y = 2231.47, z = 78.0, model = "gr_prop_gr_sign_01c"},
+    {x = 1566.84, y = 2232.92, z = 77.83, model = "gr_prop_gr_sign_01b"},
+    {x = 1568.53, y = 2237.64, z = 78.97, model = "gr_prop_gr_bunkeddoor_f"},
+    {x = 1576.03, 2232.03, z = 77.88, model = "gr_prop_gr_sign_01c"}
     -- {x = 1287.77, y = -1720.85, z = 54.83, model = "prop_forsale_sign_03"}
 }
 

@@ -396,14 +396,14 @@ Config.Teleports = {
     },
     [22] = {
         [1] = {
-            coords = vector4(1571.97, 2234.43, 79.06, 182.06),
+            coords = vector4(2489.78, 3160.71, 49.08, 189.98),
             ["AllowVehicle"] = true,
-            drawText = '[E] Enter Farmhouse Bunker'
+            drawText = '[E] Enter Bunker'
         },
         [2] = {
             coords = vector4(890.55, -3245.86, -98.27, 91.61),
             ["AllowVehicle"] = true,
-            drawText = '[E] Exit Farmhouse Bunker',
+            drawText = '[E] Exit Bunker',
         }
     },
     [23] = {
@@ -489,6 +489,41 @@ Config.Teleports = {
             ["AllowVehicle"] = true,
             drawText = '[E] Exit Tuners Car Car Meet',
         }
+    }
+}
+
+Config.Teleports2 = {
+    --teleport to red desert island
+    [1] = {
+        [1] = {
+            coords = vector4(6623.3, -765.29, 23.78, 36.16),
+            ["AllowVehicle"] = true,
+            drawText = '[E] Take Ship to Mainland',
+            color = vector3(255, 156, 51)
+        },
+        [2] = {
+            coords = vector4(848.52, -2905.83, 5.9, 179.29),
+            ["AllowVehicle"] = true,
+            drawText = '[E] Take Ship to Desert Island',
+            color = vector3(255, 156, 51)
+        },
+
+    },
+    -- to cayo perico
+    [2] = {
+        [1] = {
+            coords = vector4(4976.74, -5172.86, 2.46, 248.93),
+            ["AllowVehicle"] = true,
+            drawText = '[E] Take Ship to Mainland',
+            color = vector3(60, 233, 168)
+        },
+        [2] = {
+            coords = vector4(860.24, -2905.72, 5.9, 181.22),
+            ["AllowVehicle"] = true,
+            drawText = '[E] Take Ship to Cayo Perico Island',
+            color = vector3(60, 233, 168)
+        },
+
     }
 }
 
