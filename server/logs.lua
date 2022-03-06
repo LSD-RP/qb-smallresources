@@ -38,6 +38,7 @@ local Webhooks = {
     ['911'] = 'https://discord.com/api/webhooks/931727472297402398/jAJ_Q4diky4Q8T3VPoEn_xcANIQ0J3_3wyIIsbxIlGiYhodGjz_BV81IyXbsoEBY2662',
     ['palert'] = 'https://discord.com/api/webhooks/931727402994901082/DjEo_p395XfqF0W2RvLMOKZLOTlC7bLDNTf9KyqoD3kaCHa0tu20T7_pgaSohPuVBLEP',
     ['house'] = 'https://discord.com/api/webhooks/931727187097296936/1Wi4vk-0qY4hMNdQj7UMlBzU67iNPddeFYCvO9-MlAWYSZj53XIYC1AbNh6zSD9mqBsz',
+    ['furniture'] = 'https://discord.com/api/webhooks/949787203872096267/K0ivztmuru4jU9Dns8mPXjRh58mS8gJzLWeM80r8BAgOFpSGPzFWow9YY-tTkmzAw64Q',
 }
 
 local Colors = { -- https://www.spycolor.com/
