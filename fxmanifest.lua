@@ -39,6 +39,10 @@ client_scripts {
 data_file 'FIVEM_LOVES_YOU_4B38E96CC036038F' 'events.meta'
 data_file 'FIVEM_LOVES_YOU_341B23A2F0E0F131' 'popgroups.ymt'
 
+-- maybe try this
+-- file "sp_manifest.ymt"
+-- data_file "SCENARIO_POINTS_OVERRIDE_FILE" "sp_manifest.ymt"
+
 files {
 	'events.meta',
 	'popgroups.ymt',

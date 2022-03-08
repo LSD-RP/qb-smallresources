@@ -3,10 +3,10 @@
 CreateThread(function()
     while true do
         -- This is the Application ID (Replace this with you own)
-	SetDiscordAppId()
+	SetDiscordAppId(904108266156593173)
 
         -- Here you will have to put the image name for the "large" icon.
-	SetDiscordRichPresenceAsset('LSD')
+	SetDiscordRichPresenceAsset('logo')
         
         -- (11-11-2018) New Natives:
 
@@ -14,7 +14,7 @@ CreateThread(function()
         SetDiscordRichPresenceAssetText('LSD RP')
        
         -- Here you will have to put the image name for the "small" icon.
-        SetDiscordRichPresenceAssetSmall('LSD')
+        SetDiscordRichPresenceAssetSmall('logo')
 
         -- Here you can add hover text for the "small" icon.
         SetDiscordRichPresenceAssetSmallText('LSD RP')
@@ -30,7 +30,7 @@ CreateThread(function()
             First paramater is the button index (0 or 1), second is the title and 
             last is the url (this has to start with "fivem://connect/" or "https://") 
         ]]--
-        SetDiscordRichPresenceAction(0, "Join us!", "fivem://connect/51.222.244.113:30120")
+        SetDiscordRichPresenceAction(0, "Discord", "https://discord.gg/dCUF8K92ef")
         SetDiscordRichPresenceAction(1, "Join us!", "fivem://connect/51.222.244.113:30120")
 
         -- It updates every minute just in case.
