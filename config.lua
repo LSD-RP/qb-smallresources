@@ -22,6 +22,7 @@ ConsumeablesEat = {
     ["burger-heartstopper"] = math.random(35, 54),
     ["burger-meatfree"] = math.random(35, 54),
     ["burger-fries"] = math.random(35, 54),
+    ["cooked_meat"] = math.random(75,100),
 }
 
 ConsumeablesDrink = {
@@ -226,18 +227,18 @@ Config.Teleports = {
             drawText = '[E] Exit Movie Theater',
         }
     },
-    [10] = {
-        [1] = {
-            coords = vector4(-430.06, 261.72, 83.0, 170.49),
-            ["AllowVehicle"] = false,
-            drawText = '[E] Enter Comedy Club'
-        },
-        [2] = {
-            coords = vector4(-458.85, 284.66, 78.5, 266.75),
-            ["AllowVehicle"] = false,
-            drawText = '[E] Exit Comedy Club',
-        }
-    },
+    -- [10] = {
+    --     [1] = {
+    --         coords = vector4(-430.06, 261.72, 83.0, 170.49),
+    --         ["AllowVehicle"] = false,
+    --         drawText = '[E] Enter Comedy Club'
+    --     },
+    --     [2] = {
+    --         coords = vector4(-458.85, 284.66, 78.5, 266.75),
+    --         ["AllowVehicle"] = false,
+    --         drawText = '[E] Exit Comedy Club',
+    --     }
+    -- },
     [11] = {
         [1] = {
             coords = vector4(-1569.37, -3017.17, -74.41, 0.32),
@@ -488,6 +489,66 @@ Config.Teleports = {
             coords = vector4(-2220.81, 1157.72, -23.26, 182.38),
             ["AllowVehicle"] = true,
             drawText = '[E] Exit Tuners Car Car Meet',
+        }
+    },
+    [30] = {
+        [1] = {
+            coords = vector4(-490.47, -327.42, 69.51, 167.74),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Main Floor'
+        },
+        [2] = {
+            coords = vector4(-493.52, -327.27, 42.31, 168.25),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Offices/In-Patient',
+        }
+    },
+    [31] = {
+        [1] = {
+            coords = vector4(-439.51, -335.94, 78.3, 85.76),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Main Floor'
+        },
+        [2] = {
+            coords = vector4(-493.52, -327.27, 42.31, 168.25),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Roof',
+        }
+    },
+    [32] = {
+        [1] = {
+            coords = vector4(-449.07, -334.58, 78.3, 264.13),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Main Offices/In-Patient'
+        },
+        [2] = {
+            coords = vector4(-493.73, -327.25, 69.5, 175.57),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Roof',
+        }
+    },
+    [33] = {
+        [1] = {
+            coords = vector4(-436.14, -359.58, 34.95, 350.53),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Garage'
+        },
+        [2] = {
+            coords = vector4(-418.9, -344.73, 24.23, 112.39),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Main Floor',
+        }
+    },
+    [34] = {
+        [1] = {
+            coords = vector4(-452.63, -288.4, -130.84, 115.36),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Reception'
+        },
+        [2] = {
+            coords = vector4(-487.57, -328.16, 42.31, 174.55),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Go To Operations',
         }
     }
 }

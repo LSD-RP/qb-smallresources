@@ -6,7 +6,7 @@ Citizen.CreateThread(function()
     FinanceOrganization = exports['bob74_ipl']:GetFinanceOrganizationObject()
 
     -- Setting the name parameters
-    FinanceOrganization.Name.Set("Organization", FinanceOrganization.Name.Style.normal, FinanceOrganization.Name.Colors.black, FinanceOrganization.Name.Fonts.font13)
+    FinanceOrganization.Name.Set("LSD Realty", FinanceOrganization.Name.Style.normal, FinanceOrganization.Name.Colors.black, FinanceOrganization.Name.Fonts.font13)
 
     -- Enabling the name to be able to see it
     FinanceOrganization.Office.Enable(true)

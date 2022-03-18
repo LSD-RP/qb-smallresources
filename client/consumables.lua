@@ -194,6 +194,38 @@ function AddHealth()
     healing = false
 end
 
+function LSDEffect()
+    local ped = PlayerPedId()
+    ShakeGameplayCam("JOLT_SHAKE", 10.0)
+    Wait(500)
+    DoScreenFadeOut(1000)
+    Wait(2000)
+    DoScreenFadeIn(1000)
+    StartScreenEffect("DMT_flight")
+    SetPedMovementClipset(ped, "move_m@drunk@moderatedrunk", 1.0)
+    SetRunSprintMultiplierForPlayer(PlayerId(), 1.49)
+    ShakeGameplayCam('SKY_DIVING_SHAKE', 1.0)
+    local i = 0
+    while i < 7 do
+        Wait(7000)
+        if math.random(1,100) < 25 then
+            if IsPedRunning(ped) or IsPedSprinting(ped) then
+                SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+            else
+                SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
+            end
+        end
+        i = i + 1
+    end
+    DoScreenFadeOut(1000)
+    Wait(2000)
+    DoScreenFadeIn(1000)
+    SetRunSprintMultiplierForPlayer(PlayerId(), 1.0)
+    StopScreenEffect('DMT_flight')
+    ResetPedMovementClipset(ped, 1.0)
+    StopGameplayCamShaking()
+end
+
 -- Events
 
 RegisterNetEvent('consumables:client:Eat', function(itemName)
@@ -595,6 +627,29 @@ RegisterNetEvent('consumables:client:ResetArmor', function()
     else
         QBCore.Functions.Notify("You\'re not wearing a vest..", "error")
     end
+end)
+
+RegisterNetEvent('consumables:client:LSD', function()
+    local ped = PlayerPedId()
+    QBCore.Functions.Progressbar("take_lsd", "Quick lick..", math.random(1000,2000), false, true, {
+        disableMovement = false,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {
+        animDict = "switch@trevor@trev_smoking_meth",
+        anim = "trev_smoking_meth_loop",
+        flags = 49,
+    }, {}, {}, function() -- Done
+        StopAnimTask(ped, "switch@trevor@trev_smoking_meth", "trev_smoking_meth_loop", 1.0)
+        TriggerServerEvent("QBCore:Server:RemoveItem", "lsd", 1)
+        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["lsd"], "remove")
+        TriggerEvent("evidence:client:SetStatus", "widepupils", 200)
+        LSDEffect()
+    end, function() -- Cancel
+        StopAnimTask(ped, "switch@trevor@trev_smoking_meth", "trev_smoking_meth_loop", 1.0)
+        QBCore.Functions.Notify("Canceled..", "error")
+    end)
 end)
 
 -- RegisterNetEvent('consumables:client:UseRedSmoke', function()
