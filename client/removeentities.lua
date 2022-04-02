@@ -29,6 +29,8 @@ local objects = {
     -- {x = 1287.77, y = -1720.85, z = 54.83, model = "prop_forsale_sign_03"}
     -- wheelchair in paleto pharmacy
     {x = -170.73, y = 6386.09, z = 31.5, model = "prop_wheelchair_01"},
+    -- wheelchair in pillbox
+    {x = 301.43, y = -582.01, z = 43.28, model = "prop_wheelchair_01"},
     -- cayo perico mansion gates
     {x = 4988.85, y = -5716.28, z = 19.88, model = "h4_prop_h4_gate_l_03a"},
     {x = 4988.85, y = -5716.28, z = 19.88, model = "h4_prop_h4_gate_r_03a"},

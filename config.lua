@@ -550,6 +550,90 @@ Config.Teleports = {
             ["AllowVehicle"] = false,
             drawText = '[E] Go To Operations',
         }
+    },
+    [35] = {
+        [1] = {
+            coords = vector4(-1229.71, -286.08, 37.74, 207.95),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Enter'
+        },
+        [2] = {
+            coords = vector4(-1230.4, -284.48, 37.77, 48.28),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Exit',
+        }
+    },
+    [36] = {
+        [1] = {
+            coords = vector4(330.28, -601.13, 43.28, 69.97),
+            ["AllowVehicle"] = false,
+            drawText = '[E] To Roof'
+        },
+        [2] = {
+            coords = vector4(338.77, -583.98, 74.16, 252.95),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Enter',
+        }
+    },
+    [37] = {
+        [1] = {
+            coords = vector4(332.14, -595.56, 43.28, 75.2),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Down'
+        },
+        [2] = {
+            coords = vector4(344.5, -586.35, 28.8, 245.38),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Up',
+        }
+    },
+    [38] = {
+        [1] = {
+            coords = vector4(327.31, -603.67, 43.28, 351.65),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Morgue'
+        },
+        [2] = {
+            coords = vector4(279.41, -1349.09, 24.54, 320.31),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Hospital',
+        }
+    },
+    [39] = {
+        [1] = {
+            coords = vector4(-1022.07, -92.11, -99.4, 354.7),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Exit'
+        },
+        [2] = {
+            coords = vector4(-839.96, -231.96, 37.24, 298.8),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Enter Recording Studio',
+        }
+    },
+    [40] = {
+        [1] = {
+            coords = vector4(-843.46, -236.66, 61.02, 27.78),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Exit'
+        },
+        [2] = {
+            coords = vector4(-1010.5, -48.63, -99.4, 194.73),
+            ["AllowVehicle"] = false,
+            drawText = '[E] To Rooftop',
+        }
+    },
+    [41] = {
+        [1] = {
+            coords = vector4(-1357.7, 165.47, -99.08, 177.49),
+            ["AllowVehicle"] = true,
+            drawText = '[E] Exit'
+        },
+        [2] = {
+            coords = vector4(-1357.7, 165.47, -99.08, 177.49),
+            ["AllowVehicle"] = true,
+            drawText = '[E] To Tuners Garage',
+        }
     }
 }
 
