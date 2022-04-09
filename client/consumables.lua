@@ -5,6 +5,7 @@ local onWeed = false
 local ParachuteEquiped = false
 local currentVest = nil
 local currentVestTexture = nil
+local isDrunk = false
 
 -- Functions
 
@@ -301,9 +302,11 @@ RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName)
         TriggerServerEvent("QBCore:Server:RemoveItem", itemName, 1)
         TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesAlcohol[itemName])
         alcoholCount = alcoholCount + 1
+        
         if alcoholCount > 1 and alcoholCount < 4 then
             TriggerEvent("evidence:client:SetStatus", "alcohol", 200)
         elseif alcoholCount >= 4 then
+            if not isDrunk then drunkThread() end
             TriggerEvent("evidence:client:SetStatus", "heavyalcohol", 200)
         end
 
@@ -663,16 +666,75 @@ end)
 --     end
 -- end)
 
+
+local DRUNK_ANIM_SET = "move_m@drunk@verydrunk"
+
+local DRUNK_DRIVING_EFFECTS = {
+    1, -- brake
+    7, --turn left + accelerate
+    8, -- turn right + accelerate
+    23, -- accelerate
+    4, -- turn left 90 + braking
+    5, -- turn right 90 + braking
+}
+
+local function getRandomDrunkCarTask()
+    math.randomseed(GetGameTimer())
+
+    return DRUNK_DRIVING_EFFECTS[math.random(#DRUNK_DRIVING_EFFECTS)]
+end
+
+-- NOTE: We might want to check if a player already has an effect
+function drunkThread()
+    local playerPed = PlayerPedId()
+    isDrunk = true
+    -- print("start drunk")
+    RequestAnimSet(DRUNK_ANIM_SET)
+    while not HasAnimSetLoaded(DRUNK_ANIM_SET) do
+        Wait(5)
+    end
+
+    SetPedMovementClipset(playerPed, DRUNK_ANIM_SET)
+    ShakeGameplayCam("DRUNK_SHAKE", 3.0)
+    SetPedIsDrunk(playerPed, true)
+    SetTransitionTimecycleModifier("spectator5", 10.00)
+    Wait(1000)
+    while isDrunk do
+        -- print("DRUNK EFFECT")
+        local vehPedIsIn = GetVehiclePedIsIn(playerPed)
+        local isPedInVehicleAndDriving = (vehPedIsIn ~= 0) and (GetPedInVehicleSeat(vehPedIsIn, -1) == playerPed)
+
+        if isPedInVehicleAndDriving then
+            local randomTask = getRandomDrunkCarTask()
+            TaskVehicleTempAction(playerPed, vehPedIsIn, randomTask, 500)
+        end
+
+        Wait(5000)
+    end
+
+   
+    -- print("stop drunk")
+    isDrunk = false
+    SetTransitionTimecycleModifier("default", 10.00)
+    StopGameplayCamShaking(true)
+    ResetPedMovementClipset(PlayerPedId())
+    RemoveAnimSet(DRUNK_ANIM_SET)
+end
+
+
 --Threads
 
 CreateThread(function()
     while true do
         Wait(10)
         if alcoholCount > 0 then
-            Wait(1000 * 60 * 15)
+            Wait(1000 * 60 * 1)
             alcoholCount = alcoholCount - 1
         else
+            isDrunk = false
             Wait(2000)
         end
+
+        
     end
 end)

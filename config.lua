@@ -14,14 +14,20 @@ Config.DirtLevel = 0.1 --carwash dirt level
 ConsumeablesEat = {
     ["sandwich"] = math.random(35, 54),
     ["tosti"] = math.random(40, 50),
+    ['cheesecake'] = math.random(40, 50),
+    ['caramellatte'] = math.random(40, 50),
+    ['baconeggncheese'] = math.random(40, 50),
+    ['bfburrito'] = math.random(40, 50),
     ["twerks_candy"] = math.random(35, 54),
     ["snikkel_candy"] = math.random(40, 50),
+
     ["burger-bleeder"] = math.random(35, 54),
     ["burger-moneyshot"] = math.random(35, 54),
     ["burger-torpedo"] = math.random(35, 54),
     ["burger-heartstopper"] = math.random(35, 54),
     ["burger-meatfree"] = math.random(35, 54),
     ["burger-fries"] = math.random(35, 54),
+
     ["cooked_meat"] = math.random(75,100),
 }
 
@@ -33,6 +39,15 @@ ConsumeablesDrink = {
     --Drinks
     ["burger-softdrink"] = math.random(40, 50),
     ["burger-mshake"] = math.random(40, 50),
+    
+    ["koolaid"] = math.random(35, 54),
+    ["greentea"] = math.random(35, 54),
+    ["caramellatte"] = math.random(35, 54),
+    ["espressoshot"] = math.random(35, 54),
+    ["americano"] = math.random(35, 54),
+    ["pepmocha"] = math.random(35, 54),
+    ["boba"] = math.random(35, 54),
+    
 }
 
 ConsumeablesAlcohol = {
