@@ -116,21 +116,19 @@ CreateThread(function()
 				loadAnimDict("reaction@intimidation@cop@unarmed")
 				loadAnimDict("rcmjosh4")
 				loadAnimDict("weapons@pistol@")
-
+				local gender = "male"
+				if QBCore.Functions.GetPlayerData().charinfo.gender == 1 then gender = "female" end
 				HolsterVariant = GetPedDrawableVariation(ped, 7)
-				if HolsterVariant == 1 then
-					WearingHolster = true
-				-- elseif HolsterVariant == 1 then
-				-- 	WearingHolster = true
-				-- elseif HolsterVariant == 6 then
-				-- 	WearingHolster = true
-				-- elseif HolsterVariant == 2 then
-				-- 	WearingHolster = true
-				-- elseif HolsterVariant == 3 then
-				-- 	WearingHolster = true
-				-- elseif HolsterVariant == 5 then
-				-- 	WearingHolster = false
+				if gender == "male" then
+					if HolsterVariant == 1 then
+						WearingHolster = true
+					end
+				else
+					if HolsterVariant == 12 then
+						WearingHolster = true
+					end
 				end
+				
 				if CheckWeapon(newWeap) then
 					if holstered then
 						if WearingHolster == true then
@@ -145,8 +143,8 @@ CreateThread(function()
 							if IsWeaponHolsterable(newWeap) then
 								if currentHolster == 1 then
 									SetPedComponentVariation(ped, 7, 3, 0, 2)
-								-- elseif currentHolster == 1 then
-								-- 	SetPedComponentVariation(ped, 7, 3, 0, 2)
+								elseif currentHolster == 12 then
+									SetPedComponentVariation(ped, 7, 12, 0, 2)
 								-- elseif currentHolster == 6 then
 								-- 	SetPedComponentVariation(ped, 7, 5, 0, 2)
 								end
@@ -189,6 +187,8 @@ CreateThread(function()
 							if IsWeaponHolsterable(newWeap) then
 								if currentHolster == 1 then
 									SetPedComponentVariation(ped, 7, 3, 0, 2)
+								elseif currentHolster == 12 then
+									SetPedComponentVariation(ped, 7, 12, 0, 2)
 								-- elseif currentHolster == 1 then
 								-- 	SetPedComponentVariation(ped, 7, 3, 0, 2)
 								-- elseif currentHolster == 6 then
@@ -227,6 +227,8 @@ CreateThread(function()
 							if IsWeaponHolsterable(newWeap) then
 								if currentHolster == 1 then
 									SetPedComponentVariation(ped, 7, 3, 0, 2)
+								elseif currentHolster == 12 then
+									SetPedComponentVariation(ped, 7, 12, 0, 2)
 								-- elseif currentHolster == 1 then
 								-- 	SetPedComponentVariation(ped, 7, 3, 0, 2)
 								-- elseif currentHolster == 6 then

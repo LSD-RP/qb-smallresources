@@ -29,6 +29,7 @@ ConsumeablesEat = {
     ["burger-fries"] = math.random(35, 54),
 
     ["cooked_meat"] = math.random(75,100),
+    ["cutfish"] = math.random(35,54),
 }
 
 ConsumeablesDrink = {
@@ -54,6 +55,7 @@ ConsumeablesAlcohol = {
     ["whiskey"] = math.random(20, 30),
     ["beer"] = math.random(30, 40),
     ["vodka"] = math.random(20, 40),
+    ["rum"] = math.random(20,40),
 }
 
 Config.BlacklistedScenarios = {
@@ -513,7 +515,7 @@ Config.Teleports = {
             drawText = '[E] Go To Main Floor'
         },
         [2] = {
-            coords = vector4(-493.52, -327.27, 42.31, 168.25),
+            coords = vector4(-490.52, -327.39, 42.31, 159.7),
             ["AllowVehicle"] = false,
             drawText = '[E] Go To Offices/In-Patient',
         }
@@ -646,6 +648,18 @@ Config.Teleports = {
         },
         [2] = {
             coords = vector4(-1357.7, 165.47, -99.08, 177.49),
+            ["AllowVehicle"] = true,
+            drawText = '[E] To Tuners Garage',
+        }
+    },
+    [42] = {
+        [1] = {
+            coords = vector4(-1639.4, -3012.25, -78.14, 3.98),
+            ["AllowVehicle"] = true,
+            drawText = '[E] Exit'
+        },
+        [2] = {
+            coords = vector4(-924.66, -2938.79, 13.95, 242.11),
             ["AllowVehicle"] = true,
             drawText = '[E] To Tuners Garage',
         }

@@ -15,7 +15,7 @@ local storeBinoclarKey = 177
 CreateThread(function()
     while true do
 
-        Wait(1500)
+        Wait(2500)
 
         local lPed = PlayerPedId()
         local vehicle = GetVehiclePedIsIn(lPed)

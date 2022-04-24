@@ -66,7 +66,3 @@ QBCore.Functions.CreateCallback('smallresources:server:GetCurrentPlayers', funct
     cb(TotalPlayers)
 end)
 
-QBCore.Functions.CreateUseableItem("anchor", function(source)
-	local src = source
-    TriggerClientEvent('qb-smallresources:anchor', src)
-end)

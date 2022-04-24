@@ -182,15 +182,3 @@ function loadAnimDict(dict)
 		Citizen.Wait(5)
 	end
 end
-
-local anchored = false
-RegisterNetEvent('qb-smallresources:anchor', function()
-    local ped = PlayerPedId()
-    local veh = GetVehiclePedIsIn(ped)
-    local class = GetVehicleClass(veh)
-    if class == 14 then
-        anchored = not anchored
-        FreezeEntityPosition(veh, anchored)
-		SetEntityAsMissionEntity(veh, true, true)
-    end
-end)

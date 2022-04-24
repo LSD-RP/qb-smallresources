@@ -20,9 +20,24 @@ QBCore.Functions.CreateUseableItem("whiskey", function(source, item)
     TriggerClientEvent("consumables:client:DrinkAlcohol", src, item.name)
 end)
 
+QBCore.Functions.CreateUseableItem("rum", function(source, item)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    TriggerClientEvent("consumables:client:DrinkAlcohol", src, item.name)
+end)
+
+
 ----------- / Eat
 
 QBCore.Functions.CreateUseableItem("sandwich", function(source, item)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", src, item.name)
+    end
+end)
+
+QBCore.Functions.CreateUseableItem("cutfish", function(source, item)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
 	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
