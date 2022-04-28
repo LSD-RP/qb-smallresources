@@ -659,9 +659,9 @@ Config.Teleports = {
             drawText = '[E] Exit'
         },
         [2] = {
-            coords = vector4(-924.66, -2938.79, 13.95, 242.11),
+            coords = vector4(-1478.16, -3285.87, 13.94, 132.04),
             ["AllowVehicle"] = true,
-            drawText = '[E] To Tuners Garage',
+            drawText = '[E] To Paradise Garage',
         }
     }
 }

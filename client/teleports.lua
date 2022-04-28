@@ -107,8 +107,19 @@ CreateThread(function()
                                     SetEntityHeading(ped, Config.Teleports2[loc][1].coords.w)
                                 end
                             end
+                            local veh = GetVehiclePedIsIn(PlayerPedId())
+                            if veh then
+                                FreezeEntityPosition(veh, true)
+                            else
+                                FreezeEntityPosition(ped, true)
+                            end
                             Wait(1000)
                             DoScreenFadeIn(1000)
+                            if veh then
+                                FreezeEntityPosition(veh, false)
+                            else
+                                FreezeEntityPosition(ped, false)
+                            end
                             ResetTeleport()
                         end
                     end

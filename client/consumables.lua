@@ -209,13 +209,13 @@ function LSDEffect()
     local i = 0
     while i < 7 do
         Wait(7000)
-        if math.random(1,100) < 25 then
-            if IsPedRunning(ped) or IsPedSprinting(ped) then
-                SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-            else
-                SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
-            end
-        end
+        -- if math.random(1,100) < 25 then
+        --     if IsPedRunning(ped) or IsPedSprinting(ped) then
+        --         SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        --     else
+        --         SetPedToRagdoll(ped, 1500, 2000, 3, true, true, false)
+        --     end
+        -- end
         i = i + 1
     end
     DoScreenFadeOut(1000)
