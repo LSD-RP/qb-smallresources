@@ -135,8 +135,136 @@ CreateThread(function()
     end
 end)
 
+Citizen.CreateThread(function()
+    -- blip
+    local outsideArena = vector4(-264.73, -1897.79, 27.76, 320.18)
+    while true do
+        local sleep = 5000
+        local pos = GetEntityCoords(PlayerPedId())
+        if #(pos - outsideArena) < 20 then
+            sleep = 5
+            DrawMarker(1, outsideArena.x, outsideArena.y, outsideArena.z - 1.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.7, 5.7, 0.9, r, g, b, 0.8, false, false, 2,false, nil, nil, false)
+
+            if #(pos - outsideArena) < 2.5 then
+            end
+        end
+    end
+end)
+
 ResetTeleport = function()
     SetTimeout(1000, function()
         JustTeleported = false
     end)
+end
+
+local garageMarker = vector3(2751.03, -3698.26, 140.0)
+local outsideArena = vector3(-264.73, -1897.79, 27.76)
+local outsideHeading = 320.18
+local insideArena = vector3(2831.99, -3703.1, 140.0)
+local insideHeading = 90.2
+local DeathBlip = nil
+local GarageBlip = nil
+local MechBlip = nil
+
+Citizen.CreateThread(function()
+    -- blip
+    
+
+    local blip = AddBlipForCoord(outsideArena.x, outsideArena.y, outsideArena.z)
+    SetBlipSprite(blip, 303)
+    SetBlipDisplay(blip, 2)
+    SetBlipScale(blip, 0.5)
+    SetBlipAsShortRange(blip, true)
+    SetBlipColour(blip, 1)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("FFA Arena")
+    EndTextCommandSetBlipName(blip)
+
+    
+    while true do
+        local sleep = 5000
+        local ped = PlayerPedId()
+        local pos = GetEntityCoords(ped)
+        if #(pos - outsideArena) < 20 then
+            sleep = 2
+            DrawMarker(1, outsideArena.x, outsideArena.y, outsideArena.z - 1.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.7, 5.7, 0.9, 50, 50, 200, 0.8, false, false, 2,false, nil, nil, false)
+
+            if #(pos - outsideArena) < 2.5 then
+                DrawText3Ds(outsideArena.x, outsideArena.y, outsideArena.z, "[E] Enter Arena")
+                if IsControlJustReleased(0, 51) then
+                    createInsideBlip()
+                    if GetVehiclePedIsIn(ped, false) ~= nil then
+                        SetPedCoordsKeepVehicle(ped, insideArena.x, insideArena.y, insideArena.z)
+                        SetEntityHeading(GetVehiclePedIsIn(ped, false), insideHeading)
+                    else
+                        SetEntityCoords(ped, insideArena.x, insideArena.y, insideArena.z)
+                        SetEntityHeading(ped, insideHeading)
+                    end
+                end
+            end
+        end
+        if #(pos - insideArena) < 10 then
+            sleep = 2
+            DrawMarker(1, insideArena.x, insideArena.y, insideArena.z - 1.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.7, 5.7, 0.9, 50, 50, 200, 0.8, false, false, 2,false, nil, nil, false)
+            if #(pos - insideArena) < 2.5 then
+                DrawText3Ds(insideArena.x, insideArena.y, insideArena.z, "[E] Exit Arena")
+                if IsControlJustReleased(0, 51) then
+                    RemoveBlip(DeathBlip)
+                    DeathBlip = nil
+                    RemoveBlip(GarageBlip)
+                    GarageBlip = nil
+                    RemoveBlip(MechBlip)
+                    MechBlip = nil
+                    if GetVehiclePedIsIn(ped, false) ~= nil then
+                        SetPedCoordsKeepVehicle(ped, outsideArena.x, outsideArena.y, outsideArena.z)
+                        SetEntityHeading(GetVehiclePedIsIn(ped, false), outsideHeading)
+                    else
+                        SetEntityCoords(ped, outsideArena.x, outsideArena.y, outsideArena.z)
+                        SetEntityHeading(ped, outsideHeading)
+                    end
+                end
+            end
+        end
+        if #(pos - insideArena) < 500 then
+            if #(pos - garageMarker) > 20 then
+                sleep = 2
+                DrawMarker(2, garageMarker.x, garageMarker.y, garageMarker.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.15, 200, 0, 0, 222, false, false, false, true, false, false, false)
+            end
+        end
+        Wait(sleep)
+    end
+end)
+
+function createInsideBlip()
+    DeathBlip = AddBlipForCoord(insideArena.x, insideArena.y, insideArena.z)
+    SetBlipSprite(DeathBlip, 303)
+    SetBlipDisplay(DeathBlip, 2)
+    SetBlipScale(DeathBlip, 0.8)
+    SetBlipAsShortRange(DeathBlip, true)
+    SetBlipColour(DeathBlip, 1)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("FFA Arena")
+    EndTextCommandSetBlipName(DeathBlip)
+
+    local garagePoint = vector3(2752.48, -3700.84, 140.0)
+    GarageBlip = AddBlipForCoord(garagePoint.x, garagePoint.y, garagePoint.z)
+    SetBlipSprite(GarageBlip, 357)
+    SetBlipDisplay(GarageBlip, 2)
+    SetBlipScale(GarageBlip, 0.8)
+    SetBlipAsShortRange(GarageBlip, true)
+    SetBlipColour(GarageBlip, 2)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("FFA Garage")
+    EndTextCommandSetBlipName(GarageBlip)
+
+    local mechPoint = vector3(2775.14, -3684.74, 140.0)
+    MechBlip = AddBlipForCoord(mechPoint.x, mechPoint.y, mechPoint.z)
+    SetBlipSprite(MechBlip, 72)
+    SetBlipDisplay(MechBlip, 2)
+    SetBlipScale(MechBlip, 0.8)
+    SetBlipAsShortRange(MechBlip, true)
+    SetBlipColour(MechBlip, 0)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("FFA Mech")
+    EndTextCommandSetBlipName(MechBlip)
 end
