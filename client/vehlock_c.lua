@@ -99,6 +99,8 @@ function ToggleVehicleLock()
 	end, trimWhitespace(GetVehicleNumberPlateText(vehicle)))
 end
 
+-- ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
+
 RegisterCommand('lockcar', function()
     ToggleVehicleLock()
 end)
@@ -106,8 +108,13 @@ end)
 RegisterKeyMapping('lockcar', 'Toggle Vehcile lock', 'keyboard', 'l')
 
 function trimWhitespace(text)
-    -- return text:gsub("%s+","")
-	return text
+    -- -- return text:gsub("%s+","")
+	-- return text
+	if text then
+		return (string.gsub(text, "^%s*(.-)%s*$", "%1"))
+	else
+		return nil
+	end
 end
 
 -- Start stealing a car

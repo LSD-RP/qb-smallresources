@@ -227,93 +227,294 @@ function LSDEffect()
     StopGameplayCamShaking()
 end
 
+function EatBurgerItem(itemName)
+    if not IsAnimated then
+		prop_name = 'prop_cs_burger_01'
+		IsAnimated = true
+
+		Citizen.CreateThread(function()
+			local playerPed = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(playerPed))
+			local prop = CreateObject(GetHashKey(prop_name), 1.0, 1.0, 1.0, 1, 1, 0)
+			local boneIndex = GetPedBoneIndex(playerPed, 18905)
+			SetCurrentPedWeapon(PlayerPedId(), 0xA2719263)
+			AttachEntityToEntity(prop, playerPed, boneIndex, 0.13, 0.07, 0.02, 120.0, 16.0, 60.0, 1, 0, 0, 0, 2, 1)
+            loadAnimDict('mp_player_inteat@burger')
+            TaskPlayAnim(playerPed, 'mp_player_inteat@burger', 'mp_player_int_eat_burger_fp', 8.0, -8, -1, 49, 0, 0, 0, 0)
+
+            Citizen.Wait(5000)
+            IsAnimated = false
+            ClearPedSecondaryTask(playerPed)
+            DeleteObject(prop)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+            TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
+		end)
+	end
+end
+
+function DrinkAlcoholItem(itemName)
+    if not IsAnimated then
+		prop_name = 'prop_beer_bottle'
+		IsAnimated = true
+
+		Citizen.CreateThread(function()
+			local playerPed = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(playerPed))
+			local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
+			local boneIndex = GetPedBoneIndex(playerPed, 18905)
+			AttachEntityToEntity(prop, playerPed, boneIndex, 0.05, -0.1, 0.09, 240.0, -60.0, 0.0, true, true, false, true, 1, true)
+
+            loadAnimDict('mp_player_intdrink')
+            TaskPlayAnim(playerPed, 'mp_player_intdrink', 'loop_bottle', 1.0, -1.0, 7000, 0, 1, true, true, true)
+            Citizen.Wait(math.random(3000, 6000))
+            IsAnimated = false
+            ClearPedSecondaryTask(playerPed)
+            DeleteObject(prop)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerServerEvent("QBCore:Server:RemoveItem", itemName, 1)
+            TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesAlcohol[itemName])
+            alcoholCount = alcoholCount + 1
+            
+            if alcoholCount > 1 and alcoholCount < 4 then
+                TriggerEvent("evidence:client:SetStatus", "alcohol", 200)
+            elseif alcoholCount >= 4 then
+                if not isDrunk then drunkThread() end
+                TriggerEvent("evidence:client:SetStatus", "heavyalcohol", 200)
+            end
+		end)
+
+	end
+end
+
+function DrinkCoffeeItem(itemName)
+    if not IsAnimated then
+		prop_name = 'prop_fib_coffee'
+		IsAnimated = true
+
+		Citizen.CreateThread(function()
+			local playerPed = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(playerPed))
+			local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
+			local boneIndex = GetPedBoneIndex(playerPed, 18905)
+			AttachEntityToEntity(prop, playerPed, boneIndex, 0.1, -0.01, 0.03, 90.0, 270.0, 180.0, true, true, false, true, 1, true)
+
+			loadAnimDict('mp_player_intdrink')
+            TaskPlayAnim(playerPed, 'mp_player_intdrink', 'loop_bottle', 1.0, -1.0, 6000, 0, 1, true, true, true)
+            Citizen.Wait(5000)
+            IsAnimated = false
+            ClearPedSecondaryTask(playerPed)
+            DeleteObject(prop)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
+		end)
+
+	end
+end
+
+function EatSandwichItem(itemName)
+    if not IsAnimated then
+		prop_name ='prop_sandwich_01'
+		IsAnimated = true
+
+		Citizen.CreateThread(function()
+			local playerPed = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(playerPed))
+			local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.00, true, true, true)
+			local boneIndex = GetPedBoneIndex(playerPed, 18905)
+			AttachEntityToEntity(prop, playerPed, boneIndex, 0.13, 0.05, 0.02, -50.0, 16.0, 60.0, 1, 0, 0, 0, 2, 1)
+
+			TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 3.0, 'tasty', 0.4)
+			loadAnimDict('mp_player_inteat@burger')
+            TaskPlayAnim(playerPed, 'mp_player_inteat@burger', 'mp_player_int_eat_burger_fp', 8.0, -8, -1, 49, 0, 0, 0, 0)
+
+            Citizen.Wait(5000)
+            IsAnimated = false
+            ClearPedSecondaryTask(playerPed)
+            DeleteObject(prop)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+            TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
+		end)
+
+	end
+end
+
+function EatSteakItem(itemName)
+    if not IsAnimated then
+		prop_name = 'prop_cs_steak'
+		IsAnimated = true
+
+		Citizen.CreateThread(function()
+			local playerPed = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(playerPed))
+			local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
+			local boneIndex = GetPedBoneIndex(playerPed, 18905)
+			AttachEntityToEntity(prop, playerPed, boneIndex, 0.12, 0.028, 0.001, 10.0, 175.0, 0.0, true, true, false, true, 1, true)
+
+            loadAnimDict('mp_player_inteat@burger')
+            TaskPlayAnim(playerPed, 'mp_player_inteat@burger', 'mp_player_int_eat_burger_fp', 8.0, -8, -1, 49, 0, 0, 0, 0)
+
+            Citizen.Wait(5000)
+            IsAnimated = false
+            ClearPedSecondaryTask(playerPed)
+            DeleteObject(prop)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+            TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
+        
+		end)
+
+	end
+end
+
+function EatCandyItem(itemName)
+    if not IsAnimated then
+		prop_name = 'prop_choc_ego'
+		IsAnimated = true
+
+		Citizen.CreateThread(function()
+			local playerPed = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(playerPed))
+			local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
+			local boneIndex = GetPedBoneIndex(playerPed, 18905)
+			AttachEntityToEntity(prop, playerPed, boneIndex, 0.12, 0.035, 0.009, -30.0, -240.0, -120.0, true, true, false, true, 1, true)
+
+			TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 3.0, 'tasty', 0.4)
+			loadAnimDict('mp_player_inteat@burger')
+            TaskPlayAnim(playerPed, 'mp_player_inteat@burger', 'mp_player_int_eat_burger_fp', 8.0, -8, -1, 49, 0, 0, 0, 0)
+
+            Citizen.Wait(5000)
+            IsAnimated = false
+            ClearPedSecondaryTask(playerPed)
+            DeleteObject(prop)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+            TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
+        
+		end)
+
+	end
+end
+
+function DrinkSodaItem(itemName)
+    if not IsAnimated then
+		prop_name = 'prop_ecola_can' --ng_proc_sodacan_01a
+		IsAnimated = true
+
+		Citizen.CreateThread(function()
+			local playerPed = PlayerPedId()
+			local x,y,z = table.unpack(GetEntityCoords(playerPed))
+			local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
+			local boneIndex = GetPedBoneIndex(playerPed, 18905)
+			AttachEntityToEntity(prop, playerPed, boneIndex, 0.12, 0.008, 0.03, 240.0, -60.0, 0.0, true, true, false, true, 1, true)
+
+			TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 3.0, 'tasty', 0.4)
+            loadAnimDict('mp_player_intdrink')
+            TaskPlayAnim(playerPed, 'mp_player_intdrink', 'loop_bottle', 1.0, -1.0, 2000, 0, 1, true, true, true)
+            Citizen.Wait(5000)
+            IsAnimated = false
+            ClearPedSecondaryTask(playerPed)
+            DeleteObject(prop)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
+		end)
+
+	end
+end
+
 -- Events
 
 RegisterNetEvent('consumables:client:Eat', function(itemName)
-    TriggerEvent('animations:client:EmoteCommandStart', {"eat"})
-    QBCore.Functions.Progressbar("eat_something", "Eating..", 5000, false, true, {
-        disableMovement = false,
-        disableCarMovement = false,
-		disableMouse = false,
-		disableCombat = true,
-    }, {}, {}, {}, function() -- Done
-        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-        TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
-        TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
-    end)
+    if itemName == 'tosti' or itemName == 'baconeggncheese' or itemName == 'burger-bleeder' or itemName == 'burger-moneyshot' or itemName == 'burger-torpedo' or itemName == 'burger-heartstopper' or itemName == 'burger-meatfree' then
+        EatBurgerItem(itemName)
+    elseif itemName == 'sandwich' or itemName == 'bfburrito' then
+        EatSandwichItem(itemName)
+    elseif itemName == 'cooked_meat' or itemName == 'cutfish' then
+        EatSteakItem(itemName)
+    elseif itemName == 'twerks_candy' or itemName == 'snikkel_candy' then
+        EatCandyItem(itemName)
+    else
+        TriggerEvent('animations:client:EmoteCommandStart', {"eat"})
+        QBCore.Functions.Progressbar("eat_something", "Eating..", 5000, false, true, {
+            disableMovement = false,
+            disableCarMovement = false,
+            disableMouse = false,
+            disableCombat = true,
+        }, {}, {}, {}, function() -- Done
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+            TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+            TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
+        end)
+    end
+    
 end)
 
 RegisterNetEvent('consumables:client:Drink', function(itemName)
-    TriggerEvent('animations:client:EmoteCommandStart', {"drink"})
-    QBCore.Functions.Progressbar("drink_something", "Drinking..", 5000, false, true, {
-        disableMovement = false,
-        disableCarMovement = false,
-		disableMouse = false,
-		disableCombat = true,
-    }, {}, {}, {}, function() -- Done
-        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-        TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
-    end)
+    if itemName == 'sprunk' or itemName == 'kurkakola' then
+        DrinkSodaItem(itemName)
+    elseif itemName == 'greentea' or itemName == 'caramellatte' or itemName == 'espressoshot' or itemName == 'americano' or itemName == 'pepmocha' or itemName == 'boba' then
+        DrinkCoffeeItem(itemName)
+    else
+        TriggerEvent('animations:client:EmoteCommandStart', {"drink"})
+        QBCore.Functions.Progressbar("drink_something", "Drinking..", 5000, false, true, {
+            disableMovement = false,
+            disableCarMovement = false,
+            disableMouse = false,
+            disableCombat = true,
+        }, {}, {}, {}, function() -- Done
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+            TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+            TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
+        end)
+    end
 end)
 
 RegisterNetEvent('consumables:client:DrinkCoffee', function(itemName)
-    local playerPed = PlayerPedId()
-    TriggerEvent('animations:client:EmoteCommandStart', {"coffee"})
-    Citizen.Wait(6000)
-    ClearPedSecondaryTask(playerPed)
-    -- local prop_name = 'prop_fib_coffee'
-    -- Citizen.CreateThread(function()
-        
-    --     local x,y,z = table.unpack(GetEntityCoords(playerPed))
-    --     local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
-    --     local boneIndex = GetPedBoneIndex(playerPed, 18905)
-    --     AttachEntityToEntity(prop, playerPed, boneIndex, 0.008, -0.01, -0.03, 90.0, 270.0, 90.0, true, true, false, true, 1, true)
-    --     RequestAnimDict('mp_player_intdrink')
-    --     TaskPlayAnim(playerPed, 'mp_player_intdrink', 'loop_bottle', 1.0, -1.0, 5000, 0, 1, true, true, true)
-    --     Citizen.Wait(1000)
-    --     ClearPedSecondaryTask(playerPed)
-    --     DeleteObject(prop)
+    DrinkCoffeeItem(itemName)
+    -- local playerPed = PlayerPedId()
+    -- TriggerEvent('animations:client:EmoteCommandStart', {"coffee"})
+    -- -- Citizen.Wait(6000)
+    -- ClearPedSecondaryTask(playerPed)
+    -- QBCore.Functions.Progressbar("drink_something", "Drinking..", 5000, false, true, {
+    --     disableMovement = false,
+    --     disableCarMovement = false,
+	-- 	disableMouse = false,
+	-- 	disableCombat = true,
+    -- }, {}, {}, {}, function() -- Done
+    --     TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+    --     -- TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+    --     TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
     -- end)
-    QBCore.Functions.Progressbar("drink_something", "Drinking..", 5000, false, true, {
-        disableMovement = false,
-        disableCarMovement = false,
-		disableMouse = false,
-		disableCombat = true,
-    }, {}, {}, {}, function() -- Done
-        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
-        -- TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-        TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
-    end)
 end)
 
-
 RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName)
-    TriggerEvent('animations:client:EmoteCommandStart', {"drink"})
-    QBCore.Functions.Progressbar("snort_coke", "Drinking liquor..", math.random(3000, 6000), false, true, {
-        disableMovement = false,
-        disableCarMovement = false,
-        disableMouse = false,
-        disableCombat = true,
-    }, {}, {}, {}, function() -- Done
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
-        TriggerServerEvent("QBCore:Server:RemoveItem", itemName, 1)
-        TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesAlcohol[itemName])
-        alcoholCount = alcoholCount + 1
+    DrinkAlcoholItem(itemName)
+    -- TriggerEvent('animations:client:EmoteCommandStart', {"drink"})
+    -- QBCore.Functions.Progressbar("snort_coke", "Drinking liquor..", math.random(3000, 6000), false, true, {
+    --     disableMovement = false,
+    --     disableCarMovement = false,
+    --     disableMouse = false,
+    --     disableCombat = true,
+    -- }, {}, {}, {}, function() -- Done
+    --     TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+    --     TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
+    --     TriggerServerEvent("QBCore:Server:RemoveItem", itemName, 1)
+    --     TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesAlcohol[itemName])
+    --     alcoholCount = alcoholCount + 1
         
-        if alcoholCount > 1 and alcoholCount < 4 then
-            TriggerEvent("evidence:client:SetStatus", "alcohol", 200)
-        elseif alcoholCount >= 4 then
-            if not isDrunk then drunkThread() end
-            TriggerEvent("evidence:client:SetStatus", "heavyalcohol", 200)
-        end
+    --     if alcoholCount > 1 and alcoholCount < 4 then
+    --         TriggerEvent("evidence:client:SetStatus", "alcohol", 200)
+    --     elseif alcoholCount >= 4 then
+    --         if not isDrunk then drunkThread() end
+    --         TriggerEvent("evidence:client:SetStatus", "heavyalcohol", 200)
+    --     end
 
-    end, function() -- Cancel
-        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-        QBCore.Functions.Notify("Cancelled..", "error")
-    end)
+    -- end, function() -- Cancel
+    --     TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+    --     QBCore.Functions.Notify("Cancelled..", "error")
+    -- end)
 end)
 
 RegisterNetEvent('consumables:client:Cokebaggy', function()

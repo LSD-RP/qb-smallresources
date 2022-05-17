@@ -21,7 +21,7 @@ RegisterCommand('hu', function()
                     while handsup do
                         Wait(1)
                         DisableControlAction(0, 59, true) -- Disable steering in vehicle
-			DisableControlAction(0,21,true) -- disable sprint
+			            DisableControlAction(0,21,true) -- disable sprint
                         DisableControlAction(0,24,true) -- disable attack
                         DisableControlAction(0,25,true) -- disable aim
                         DisableControlAction(0,47,true) -- disable weapon

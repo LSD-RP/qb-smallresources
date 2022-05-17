@@ -135,22 +135,6 @@ CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
-    -- blip
-    local outsideArena = vector4(-264.73, -1897.79, 27.76, 320.18)
-    while true do
-        local sleep = 5000
-        local pos = GetEntityCoords(PlayerPedId())
-        if #(pos - outsideArena) < 20 then
-            sleep = 5
-            DrawMarker(1, outsideArena.x, outsideArena.y, outsideArena.z - 1.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.7, 5.7, 0.9, r, g, b, 0.8, false, false, 2,false, nil, nil, false)
-
-            if #(pos - outsideArena) < 2.5 then
-            end
-        end
-    end
-end)
-
 ResetTeleport = function()
     SetTimeout(1000, function()
         JustTeleported = false
@@ -160,8 +144,8 @@ end
 local garageMarker = vector3(2751.03, -3698.26, 140.0)
 local outsideArena = vector3(-264.73, -1897.79, 27.76)
 local outsideHeading = 320.18
-local insideArena = vector3(2831.99, -3703.1, 140.0)
-local insideHeading = 90.2
+local insideArena = vector3(2723.84, -3891.93, 140.0)
+local insideHeading = 261.35
 local DeathBlip = nil
 local GarageBlip = nil
 local MechBlip = nil
@@ -215,6 +199,8 @@ Citizen.CreateThread(function()
                     GarageBlip = nil
                     RemoveBlip(MechBlip)
                     MechBlip = nil
+                    RemoveBlip(DepotBlip)
+                    DepotBlip = nil
                     if GetVehiclePedIsIn(ped, false) ~= nil then
                         SetPedCoordsKeepVehicle(ped, outsideArena.x, outsideArena.y, outsideArena.z)
                         SetEntityHeading(GetVehiclePedIsIn(ped, false), outsideHeading)
@@ -246,7 +232,7 @@ function createInsideBlip()
     AddTextComponentSubstringPlayerName("FFA Arena")
     EndTextCommandSetBlipName(DeathBlip)
 
-    local garagePoint = vector3(2752.48, -3700.84, 140.0)
+    local garagePoint = vector3(2766.66, -3903.61, 140.0)
     GarageBlip = AddBlipForCoord(garagePoint.x, garagePoint.y, garagePoint.z)
     SetBlipSprite(GarageBlip, 357)
     SetBlipDisplay(GarageBlip, 2)
@@ -257,7 +243,7 @@ function createInsideBlip()
     AddTextComponentSubstringPlayerName("FFA Garage")
     EndTextCommandSetBlipName(GarageBlip)
 
-    local mechPoint = vector3(2775.14, -3684.74, 140.0)
+    local mechPoint = vector3(2814.17, -3894.05, 140.0)
     MechBlip = AddBlipForCoord(mechPoint.x, mechPoint.y, mechPoint.z)
     SetBlipSprite(MechBlip, 72)
     SetBlipDisplay(MechBlip, 2)
@@ -267,4 +253,15 @@ function createInsideBlip()
     BeginTextCommandSetBlipName("STRING")
     AddTextComponentSubstringPlayerName("FFA Mech")
     EndTextCommandSetBlipName(MechBlip)
+
+    local depotPoint = vector3(2860.57, -3898.68, 140.0)
+    DepotBlip = AddBlipForCoord(depotPoint.x, depotPoint.y, depotPoint.z)
+    SetBlipSprite(DepotBlip, 357)
+    SetBlipDisplay(DepotBlip, 2)
+    SetBlipScale(DepotBlip, 0.5)
+    SetBlipAsShortRange(DepotBlip, true)
+    SetBlipColour(DepotBlip, 1)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentSubstringPlayerName("FFA Depot")
+    EndTextCommandSetBlipName(DepotBlip)
 end
