@@ -25,6 +25,10 @@ stopPointing = function()
     ClearPedSecondaryTask(PlayerPedId())
 end
 
+-- exports('IsPedPointing', function()
+--     return mp_pointing
+-- end)
+
 RegisterCommand('point', function()
     if not IsPedInAnyVehicle(PlayerPedId(), false) then
         if mp_pointing then

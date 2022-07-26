@@ -30,6 +30,14 @@ ConsumeablesEat = {
 
     ["cooked_meat"] = math.random(75,100),
     ["cutfish"] = math.random(35,54),
+
+    ["chocolate-froyo"] = math.random(35,54),
+    ["vanilla-froyo"] = math.random(35,54),
+    ["berry-froyo"] = math.random(35,54),
+    ["oreo-froyo"] = math.random(35,54),
+    ["strawberry-froyo"] = math.random(35,54),
+    ["banana-froyo"] = math.random(35,54),
+    ["pineapple-froyo"] = math.random(35,54),
 }
 
 ConsumeablesDrink = {
@@ -47,8 +55,36 @@ ConsumeablesDrink = {
     ["espressoshot"] = math.random(35, 54),
     ["americano"] = math.random(35, 54),
     ["pepmocha"] = math.random(35, 54),
-    ["boba"] = math.random(35, 54),
+
+    ["banana-smoothie"] = math.random(35, 54),
+    ["mango-smoothie"] = math.random(35, 54),
+    ["strawberry-smoothie"] = math.random(35, 54),
+    ["pineapple-smoothie"] = math.random(35, 54),
+    ["orange-smoothie"] = math.random(35, 54),
+    ["lemon-smoothie"] = math.random(35, 54),
+    ["kiwi-smoothie"] = math.random(35, 54),
+    ["dragonfruit-smoothie"] = math.random(35, 54),
     
+    ["bobatea"] = math.random(35, 54),
+    ["herbaltea"] = math.random(35, 54),
+    ["chamomiletea"] = math.random(35, 54),
+    ["sweetblacktea"] = math.random(35, 54),
+    ["unsweetblacktea"] = math.random(35, 54),
+    ["mangotea"] = math.random(35, 54),
+    ["lemontea"] = math.random(35, 54),
+    ["passionfruittea"] = math.random(35, 54),
+    ["peachtea"] = math.random(35, 54),
+    ["minttea"] = math.random(35, 54),
+    
+    ["blue-slushie"] = math.random(35, 54),
+    ["red-slushie"] = math.random(35, 54),
+    ["green-slushie"] = math.random(35, 54),
+    ["white-slushie"] = math.random(35, 54),
+    
+    ["chocolate-milkshake"] = math.random(35, 54),
+    ["vanilla-milkshake"] = math.random(35, 54),
+    ["strawberry-milkshake"] = math.random(35, 54),
+
 }
 
 ConsumeablesAlcohol = {
