@@ -699,6 +699,30 @@ Config.Teleports = {
             ["AllowVehicle"] = true,
             drawText = '[E] To Paradise Garage',
         }
+    },
+    [43] = {
+        [1] = {
+            coords = vector4(844.11, -3005.2, -44.4, 276.1),
+            ["AllowVehicle"] = false,
+            drawText = '[E] Exit'
+        },
+        [2] = {
+            coords = vector4(1384.32, -2079.85, 52.41, 224.78),
+            ["AllowVehicle"] = true,
+            drawText = '[E] To Warehouse',
+        }
+    },
+    [44] = {
+        [1] = {
+            coords = vector4(815.53, -3001.7, -69.0, 90.28),
+            ["AllowVehicle"] = true,
+            drawText = '[E] Exit'
+        },
+        [2] = {
+            coords = vector4(-84.13, -820.12, 36.03, 342.67),
+            ["AllowVehicle"] = true,
+            drawText = '[E] To Vehicle Warehouse',
+        }
     }
 }
 

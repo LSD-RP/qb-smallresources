@@ -1,11 +1,11 @@
 -- Variables
 
 local alcoholCount = 0
-local onWeed = false
 local ParachuteEquiped = false
 local currentVest = nil
 local currentVestTexture = nil
 local isDrunk = false
+local healing = false
 
 -- Functions
 
@@ -51,7 +51,6 @@ function MethBagEffect()
             TrevorEffect()
         end
     end
-    startStamina = 0
     SetRunSprintMultiplierForPlayer(PlayerId(), 1.0)
 end
 
@@ -81,29 +80,6 @@ function EcstasyEffect()
     if IsPedRunning(PlayerPedId()) then
         SetPedToRagdoll(PlayerPedId(), math.random(1000, 3000), math.random(1000, 3000), 3, 0, 0, 0)
     end
-
-    startStamina = 0
-end
-
-function JointEffect()
-    -- if not onWeed then
-    --     local RelieveOdd = math.random(35, 45)
-    --     onWeed = true
-    --     local weedTime = Config.JointEffectTime
-    --     CreateThread(function()
-    --         while onWeed do
-    --             SetPlayerHealthRechargeMultiplier(PlayerId(), 1.8)
-    --             Wait(1000)
-    --             weedTime = weedTime - 1
-    --             if weedTime == RelieveOdd then
-    --                 TriggerServerEvent('hud:Server:RelieveStress', math.random(14, 18))
-    --             end
-    --             if weedTime <= 0 then
-    --                 onWeed = false
-    --             end
-    --         end
-    --     end)
-    -- end
 end
 
 function CrackBaggyEffect()
@@ -127,8 +103,6 @@ function CrackBaggyEffect()
     if IsPedRunning(ped) then
         SetPedToRagdoll(ped, math.random(1000, 3000), math.random(1000, 3000), 3, 0, 0, 0)
     end
-
-    startStamina = 0
     SetRunSprintMultiplierForPlayer(PlayerId(), 1.0)
 end
 
@@ -154,8 +128,6 @@ function CokeBaggyEffect()
     if IsPedRunning(ped) then
         SetPedToRagdoll(ped, math.random(1000, 3000), math.random(1000, 3000), 3, 0, 0, 0)
     end
-
-    startStamina = 0
     SetRunSprintMultiplierForPlayer(PlayerId(), 1.0)
 end
 
@@ -272,7 +244,6 @@ function DrinkAlcoholItem(itemName)
             ClearPedSecondaryTask(playerPed)
             DeleteObject(prop)
             TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
-            TriggerServerEvent("QBCore:Server:RemoveItem", itemName, 1)
             TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesAlcohol[itemName])
             alcoholCount = alcoholCount + 1
             
@@ -500,7 +471,6 @@ RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName)
     -- }, {}, {}, {}, function() -- Done
     --     TriggerEvent('animations:client:EmoteCommandStart', {"c"})
     --     TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
-    --     TriggerServerEvent("QBCore:Server:RemoveItem", itemName, 1)
     --     TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesAlcohol[itemName])
     --     alcoholCount = alcoholCount + 1
         
@@ -530,7 +500,6 @@ RegisterNetEvent('consumables:client:Cokebaggy', function()
         flags = 49,
     }, {}, {}, function() -- Done
         StopAnimTask(ped, "switch@trevor@trev_smoking_meth", "trev_smoking_meth_loop", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "cokebaggy", 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["cokebaggy"], "remove")
         TriggerEvent("evidence:client:SetStatus", "widepupils", 200)
         CokeBaggyEffect()
@@ -553,7 +522,6 @@ RegisterNetEvent('consumables:client:Crackbaggy', function()
         flags = 49,
     }, {}, {}, function() -- Done
         StopAnimTask(ped, "switch@trevor@trev_smoking_meth", "trev_smoking_meth_loop", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "crack_baggy", 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["crack_baggy"], "remove")
         TriggerEvent("evidence:client:SetStatus", "widepupils", 300)
         CrackBaggyEffect()
@@ -575,7 +543,6 @@ RegisterNetEvent('consumables:client:EcstasyBaggy', function()
 		flags = 49,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "mp_suicide", "pill", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "xtcbaggy", 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["xtcbaggy"], "remove")
         EcstasyEffect()
     end, function() -- Cancel
@@ -596,7 +563,6 @@ RegisterNetEvent('consumables:client:oxy', function()
 		flags = 49,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "mp_suicide", "pill", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "oxy", 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["oxy"], "remove")
         ClearPedBloodDamage(PlayerPedId())
 		HealOxy()
@@ -635,7 +601,6 @@ RegisterNetEvent('consumables:client:peyote', function()
 		flags = 49,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "mp_suicide", "pill", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "peyote", 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["peyote"], "remove")
         ClearPedBloodDamage(PlayerPedId())
         DoScreenFadeOut(2000)
@@ -675,7 +640,6 @@ RegisterNetEvent('consumables:client:meth', function()
         flags = 49,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "switch@trevor@trev_smoking_meth", "trev_smoking_meth_loop", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "meth", 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["meth"], "remove")
         TriggerEvent("evidence:client:SetStatus", "widepupils", 300)
 		TriggerEvent("evidence:client:SetStatus", "agitated", 300)
@@ -780,7 +744,6 @@ RegisterNetEvent('consumables:client:UseArmor', function()
     }, {}, {}, {}, function() -- Done
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["armor"], "remove")
         TriggerServerEvent('hospital:server:SetArmor', 75)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "armor", 1)
         SetPedArmour(PlayerPedId(), 75)
     end)
 end)
@@ -809,7 +772,6 @@ RegisterNetEvent('consumables:client:UseHeavyArmor', function()
             SetPedComponentVariation(ped, 9, 30, 0, 2)
         end
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["heavyarmor"], "remove")
-        TriggerServerEvent("QBCore:Server:RemoveItem", "heavyarmor", 1)
         SetPedArmour(ped, 100)
     end)
 end)
@@ -826,7 +788,7 @@ RegisterNetEvent('consumables:client:ResetArmor', function()
             SetPedComponentVariation(ped, 9, currentVest, currentVestTexture, 2)
             SetPedArmour(ped, 0)
             TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["heavyarmor"], "add")
-            TriggerServerEvent("QBCore:Server:AddItem", "heavyarmor", 1)
+            TriggerServerEvent("qb-smallresources:server:AddItem", "heavyarmor", 1)
         end)
     else
         QBCore.Functions.Notify("You\'re not wearing a vest..", "error")
@@ -846,7 +808,6 @@ RegisterNetEvent('consumables:client:LSD', function()
         flags = 49,
     }, {}, {}, function() -- Done
         StopAnimTask(ped, "switch@trevor@trev_smoking_meth", "trev_smoking_meth_loop", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", "lsd", 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["lsd"], "remove")
         TriggerEvent("evidence:client:SetStatus", "widepupils", 200)
         LSDEffect()

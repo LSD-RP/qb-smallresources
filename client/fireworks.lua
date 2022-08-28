@@ -83,7 +83,6 @@ RegisterNetEvent('fireworks:client:UseFirework', function(itemName, assetName)
         flags = 16,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
-        TriggerServerEvent("QBCore:Server:RemoveItem", itemName, 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[itemName], "remove")
         local pos = GetEntityCoords(PlayerPedId())
         DoFireWork(assetName, pos)
@@ -117,11 +116,10 @@ function DoFireWork(asset, coords)
             fireworkTime = fireworkTime - 1
         end
         UseParticleFxAssetNextCall("scr_indep_fireworks")
-        local part = StartNetworkedParticleFxNonLoopedAtCoord("scr_indep_firework_shotburst", fireworkLoc.x, fireworkLoc.y, fireworkLoc.z + 42.5, 0.0, 0.0, 0.0, math.random() * 0.3 + 0.5, false, false, false, false)    
-        for i = 1, math.random(5, 10), 1 do
+        for _ = 1, math.random(5, 10), 1 do
             local firework = FireworkList[asset][math.random(1, #FireworkList[asset])]
             UseParticleFxAssetNextCall(asset)
-            local part = StartNetworkedParticleFxNonLoopedAtCoord(firework, fireworkLoc.x, fireworkLoc.y, fireworkLoc.z + 42.5, 0.0, 0.0, 0.0, math.random() * 0.3 + 0.5, false, false, false, false)
+            StartNetworkedParticleFxNonLoopedAtCoord(firework, fireworkLoc.x, fireworkLoc.y, fireworkLoc.z + 42.5, 0.0, 0.0, 0.0, math.random() * 0.3 + 0.5, false, false, false, false)
             Wait(math.random()*500)
         end
         fireworkLoc = nil
