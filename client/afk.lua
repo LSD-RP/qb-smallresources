@@ -1,9 +1,23 @@
--- AFK Kick Time Limit (in seconds)
-local group = 'user'
-local secondsUntilKick = 1800
 local QBCore = exports['qb-core']:GetCoreObject()
+local isLoggedIn = LocalPlayer.state.isLoggedIn
+local ignoredGroups = {
+    ['mod'] = true,
+    ['admin'] = true,
+    ['god'] = true
+}
+local secondsUntilKick = 1800 -- AFK Kick Time Limit (in seconds)
+local checkUser = true
 local prevPos, time = nil, nil
-
+local timeMinutes = {
+    ['900'] = 'minutes',
+    ['600'] = 'minutes',
+    ['300'] = 'minutes',
+    ['150'] = 'minutes',
+    ['60'] = 'minutes',
+    ['30'] = 'seconds',
+    ['20'] = 'seconds',
+    ['10'] = 'seconds',
+}
 
 
 -- RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
