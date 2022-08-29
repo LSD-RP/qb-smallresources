@@ -1,5 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local isLoggedIn = LocalPlayer.state.isLoggedIn
+local isLoggedIn = true
 
 local function TackleAnim()
     local ped = PlayerPedId()
@@ -38,20 +38,20 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
 end)
 
 CreateThread(function()
-    local sleep
-    while true do
-        sleep = 250
-        if isLoggedIn then
+    while true do 
+        if QBCore ~= nil then
             local ped = PlayerPedId()
             if not IsPedInAnyVehicle(ped, false) and GetEntitySpeed(ped) > 2.5 then
                 EnableControlAction(0, 19, true)
                 if IsControlJustPressed(0, 19) then
                     Tackle()
                 end
+            else
+                Wait(250)
             end
         end
 
-        Wait(sleep)
+        Wait(1)
     end
 end)
 

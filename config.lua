@@ -12,7 +12,7 @@ Config.DefaultPrice = 20 -- Default price for the carwash
 Config.DirtLevel = 0.1 -- Threshold for the dirt level to be counted as dirty
 Config.DisableAmbience = false -- Disabled distance sirens, distance car alarms, etc
 
-ConsumablesEat = {
+ConsumeablesEat = {
     ["sandwich"] = math.random(35, 54),
     ["tosti"] = math.random(40, 50),
     ['cheesecake'] = math.random(40, 50),
@@ -41,7 +41,7 @@ ConsumablesEat = {
     ["pineapple-froyo"] = math.random(35,54),
 }
 
-ConsumablesDrink = {
+ConsumeablesDrink = {
     ["water_bottle"] = math.random(35, 54),
     ["kurkakola"] = math.random(35, 54),
     ["sprunk"] = math.random(35, 54),
@@ -88,14 +88,14 @@ ConsumablesDrink = {
 
 }
 
-ConsumablesAlcohol = {
+ConsumeablesAlcohol = {
     ["whiskey"] = math.random(20, 30),
     ["beer"] = math.random(30, 40),
     ["vodka"] = math.random(20, 40),
     ["rum"] = math.random(20,40),
 }
 
-ConsumablesFireworks = {
+ConsumeablesFireworks = {
     "firework1",
     "firework2",
     "firework3",
